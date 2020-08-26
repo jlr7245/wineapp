@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import WineLink from './WineLink';
 
 const WineBox = () => {
   const [wineList, setWineList] = useState([]);
@@ -15,9 +16,7 @@ const WineBox = () => {
         wineList.map((wine) => (
           <div key={wine.id}>
             <img src={wine.picture} />
-            <h3>
-              {wine.name}, {wine.year}
-            </h3>
+            <WineLink wine={wine} />
             <p>
               Made with {wine.grapes} grapes grown in {wine.region},{' '}
               {wine.country}

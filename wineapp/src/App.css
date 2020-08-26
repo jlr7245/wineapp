@@ -23,4 +23,18 @@ nav {
 section {
   flex-grow: 1;
   padding: 150px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+section div {
+  flex-basis: 300px;
+  box-sizing: border-box;
+  border: 1px solid lightblue;
+  padding: 8px;
+  margin: 8px;
+}
+
+section div img {
+  max-width: 250px;
 }
