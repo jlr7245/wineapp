@@ -2,7 +2,7 @@ import React from 'react';
 
 const WineLink = (props) => {
   return (
-  <p>{props.wine.name}, {props.wine.year}</p>
+  <h3>{props.wine.name}, {props.wine.year}</h3>
   )
 }
 

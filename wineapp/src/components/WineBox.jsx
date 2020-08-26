@@ -1,36 +1,35 @@
-import React from 'react';
-
+import React, { useEffect, useState } from 'react';
 import WineLink from './WineLink';
 
-class WineBox extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      wines: []
-    }
-  }
 
-  componentDidMount() {
+const WineBox = () => {
+  const [wineList, setWineList] = useState([]);
+  useEffect(() => {
     fetch('http://myapi-profstream.herokuapp.com/api/1e02af/wines')
-    .then(res => res.json())
-    .then(wines => {
-      this.setState({ wines })
-    })
-  }
-  
-  render() {
-    return (
-      <section>
-        {this.state.wines.length > 0 ?
-          this.state.wines.map((wine) => {
-            return (<WineLink key={wine.id} wine={wine} />)
-          })
-          :
-          <p>Still loading wines...</p>
-        }
-      </section>
-    )
-  }
-}
+      .then((res) => res.json())
+      .then((res) => {
+        setWineList(res);
+      });
+  }, []);
+  return (
+    <section>
+      {wineList.length ? (
+        wineList.map((wine) => (
+          <div key={wine.id}>
+            <img src={wine.picture} />
+            <WineLink wine={wine} />
+            <p>
+              Made with {wine.grapes} grapes grown in {wine.region},{' '}
+              {wine.country}
+            </p>
+            <p>{wine.description}</p>
+          </div>
+        ))
+      ) : (
+        <p>Loading...</p>
+      )}
+    </section>
+  );
+};
 
 export default WineBox;
