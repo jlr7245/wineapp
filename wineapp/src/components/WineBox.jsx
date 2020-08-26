@@ -14,6 +14,7 @@ const WineBox = () => {
       {wineList.length ? (
         wineList.map((wine) => (
           <div key={wine.id}>
+            <img src={wine.picture} />
             <h3>
               {wine.name}, {wine.year}
             </h3>
