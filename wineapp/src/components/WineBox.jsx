@@ -1,9 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const WineBox = () => {
+  const [wineList, setWineList] = useState([]);
+  useEffect(() => {
+    fetch('http://myapi-profstream.herokuapp.com/api/1e02af/wines')
+      .then(res => res.json())
+      .then(res => {
+        console.log(res);
+        setWineList(res);
+      })
+  }, []);
   return (
     <section>
-      <h1>The WINEBOX!!!!!!</h1>
+      {wineList.length ? wineList.map(wine => (
+        <div key={wine.id}>
+          <h3>{wine.name}, {wine.year}</h3>
+          <p>Made with {wine.grapes} grapes grown in {wine.region}, {wine.country}</p>
+          <p>{wine.description}</p>
+        </div>
+      )) : <p>Loading...</p>} 
     </section>
   )
 }
